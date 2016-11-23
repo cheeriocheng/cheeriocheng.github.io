@@ -30,29 +30,30 @@ class Seashell {
     this._spiral = null;
     this._shell = null; 
   }
-   loadMoon(){
-      this.A =   2.5; //25
+  
+  loadMoon(){
+      this.A =   2.5; //2.5
  
       this.deltaTheta = degToRad(18) ; //degrees per new session //18 23
       
-     
+      this.minStep = 2;   //allow gaps in first few rings
       this.D = 1 ;  //direction : 1 or -1 
       this.steps = 55; //30,100 how many ellipses C to draw
-      this.cSteps = 18; //12, 10 how many straight lines makes an ellipse C
+      this.cSteps = 18; //18 how many straight lines makes an ellipse C
       this.alpha= degToRad(83);  //83
-      this.beta=degToRad(42);  //how steep the cone of spiral is 
-      this.phi=degToRad(70);  //
-      this.mu=degToRad(10);  //5 how twisty the spiral is . good one!
-      this.omega=degToRad(30);  
+      this.beta=degToRad(42);  //42 how steep the cone of spiral is 
+      this.phi=degToRad(60);  //
+      this.mu=degToRad(-20);  //10 how twisty the spiral is . good one!
+      this.omega=degToRad(70);  //30 
       
       //opening of the tube 
-      this.a=1.2; //12
-      this.b=2; //20
+      this.a=1.2; //1.2 /1.5
+      this.b=2.0; //2.0/1/5
 
       //extrusion
-      this.eA = 1.2;
-      this.eB = 1.2;
-      this.minStep = 2;   //allow gaps in first few rings
+      this.eA = 1.2; // 1.2;
+      this.eB = 1.2; // 1.2;
+   
       this.L=0; //2
       this.P=4; 
       this.W1=5; 
