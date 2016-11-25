@@ -40,15 +40,15 @@ class Seashell {
       this.D = 1 ;  //direction : 1 or -1 
       this.steps = 55; //30,100 how many ellipses C to draw
       this.cSteps = 18; //18 how many straight lines makes an ellipse C
-      this.alpha= degToRad(83);  //83
-      this.beta=degToRad(42);  //42 how steep the cone of spiral is 
-      this.phi=degToRad(60);  //
-      this.mu=degToRad(-20);  //10 how twisty the spiral is . good one!
-      this.omega=degToRad(70);  //30 
+      this.alpha= degToRad(82.5);  //83
+      this.beta=degToRad(25);  //42 how steep the cone of spiral is 
+      this.phi=degToRad(70);  //70
+      this.mu=degToRad(10);  //10 how twisty the spiral is 
+      this.omega=degToRad(30);  //30 ,  70
       
       //opening of the tube 
-      this.a=1.2; //1.2 /1.5
-      this.b=2.0; //2.0/1/5
+      this.a=1.34; //1.2 /1.5
+      this.b=1.76; //2.0/1/5
 
       //extrusion
       this.eA = 1.2; // 1.2;
