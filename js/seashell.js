@@ -9,7 +9,7 @@ var group;
 var ss ;//seashell instance
 
 init();
-animate();
+// animate();
 
 
 function init() {
@@ -116,7 +116,7 @@ function animate() {
 
 function render() {
 
-  // controls.update();
+  controls.update();
 
   // if (mobile) {
   //     camera.position.set(0, 0, 0)
