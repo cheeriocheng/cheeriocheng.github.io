@@ -24,14 +24,14 @@ cFormDiv.appendChild(cForm);
 // addFormParam(cForm, "steps", 30.0, 10.0, 200.0, 10.0); //100
 // addFormParam(cForm, "cSteps", 30.0, 1.0, 20.0, 1.0);
 
-// addFormParam(cForm, "beta", 80.0, 0.0, 90.0, 1.0);
+addFormParam(cForm, "beta", 25.0,10.0, 80.0, 5.0);
 // addFormParam(cForm, "phi", 70.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "mu", 30.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "omega", 30.0, 0.0, 90.0, 1.0);
 
-addFormParam(cForm, "alpha", 83.0, 81.0, 84.0, 0.25);
-addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.7, 0.1);
-addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
+addFormParam(cForm, "alpha", 83.0, 81.0, 85.0, 0.25);
+addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1);
+// addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
 var rebuildButton = document.createElement("button");
 rebuildButton.type = "submit";
@@ -45,17 +45,17 @@ cForm.addEventListener("submit", function (event) {
   buildScene(); // in seashell.js
 });
 
-//add export button 
-// 1. Create the button
-var button = document.createElement("button");
-button.innerHTML = "export obj";
-// 2. Append somewhere
-exportDiv.appendChild(button);
+// //add export button 
+// // 1. Create the button
+// var button = document.createElement("button");
+// button.innerHTML = "export obj";
+// // 2. Append somewhere
+// exportDiv.appendChild(button);
 
-// 3. Add event handler
-button.addEventListener ("click", function() {
-  exportToObj();
-});
+// // 3. Add event handler
+// button.addEventListener ("click", function() {
+//   exportToObj();
+// });
 
 function addFormParam(frm, d, vl, mn, mx, stp) {
   //<input type="range" min="0" max="50" value="25" />
@@ -78,6 +78,7 @@ function addFormParam(frm, d, vl, mn, mx, stp) {
 
   slider.addEventListener("change", function(){
     console.log(d, document.getElementById(d).value);
+
   });
 }
 

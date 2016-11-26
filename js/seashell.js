@@ -29,7 +29,7 @@ function buildScene() {
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0, 25);
+  camera.position.set(12, -12, 25); //0, 0, 25
   camera.focalLength = camera.position.distanceTo(scene.position);
   camera.lookAt(scene.position);
 
@@ -80,12 +80,12 @@ function getControlParams() {
   return {
     // "A": parseFloat(document.getElementById("A").value),
     // "turns": parseFloat(document.getElementById("turns").value),
-    "deltaTheta": parseFloat(document.getElementById("deltaTheta").value),
+    // "deltaTheta": parseFloat(document.getElementById("deltaTheta").value),
     // "D": parseFloat(document.getElementById("D").value),
     // "steps": parseFloat(document.getElementById("steps").value),
     // "cSteps": parseFloat(document.getElementById("cSteps").value),
     "alpha": parseFloat(document.getElementById("alpha").value),
-    // "beta": parseFloat(document.getElementById("beta").value),
+    "beta": parseFloat(document.getElementById("beta").value),
     // "phi": parseFloat(document.getElementById("phi").value),
     // "mu": parseFloat(document.getElementById("mu").value),
     // "omega": parseFloat(document.getElementById("omega").value)

@@ -11,8 +11,8 @@ class Seashell {
     
     this.minStep = 2;   //allow gaps in first few rings
     this.D = 1 ;  //direction : 1 or -1 
-    this.steps = 55; //30,100 how many ellipses C to draw
-    this.cSteps = 18; //18 how many straight lines makes an ellipse C
+    this.steps = 45; //30,100 how many ellipses C to draw
+    this.cSteps = 12; //18 how many straight lines makes an ellipse C
     this.alpha= degToRad(83);  //83
     this.beta=degToRad(25);  //42 how steep the cone of spiral is 
     this.phi=degToRad(70);  //70
@@ -79,12 +79,12 @@ class Seashell {
     //// get data from UI 
     // this.A = p["A"];
     // this.turns = p["turns"];
-    this.deltaTheta = degToRad(p["deltaTheta"]);
+    // this.deltaTheta = degToRad(p["deltaTheta"]);
     // this.D = p["D"];
     // this.steps = p["steps"];
     // this.cSteps = p["cSteps"];
     this.alpha = degToRad(p["alpha"]);
-    // this.beta = degToRad(p["beta"]);
+    this.beta = degToRad(p["beta"]);
     // this.phi = degToRad(p["phi"]);
     // this.mu = degToRad(p["mu"]);
     // this.omega = degToRad(p["omega"]);
@@ -278,7 +278,7 @@ class Seashell {
       extrusionSpline.type = 'catmullrom';
       extrusionSpline.closed = true;
       var extrudeSettings = {
-        steps           : this.cSteps*3, //int. number of points used for subdividing segements of extrude spline 
+        steps           : this.cSteps*2, //int. number of points used for subdividing segements of extrude spline 
         bevelEnabled    : false,
         extrudePath     : extrusionSpline
       };
