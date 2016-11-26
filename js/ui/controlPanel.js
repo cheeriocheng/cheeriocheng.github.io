@@ -24,7 +24,7 @@ cFormDiv.appendChild(cForm);
 // addFormParam(cForm, "steps", 30.0, 10.0, 200.0, 10.0); //100
 // addFormParam(cForm, "cSteps", 30.0, 1.0, 20.0, 1.0);
 
-addFormParam(cForm, "beta", 25.0,10.0, 80.0, 5.0);
+addFormParam(cForm, "beta", 25.0,1.0, 80.0, 5.0);
 // addFormParam(cForm, "phi", 70.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "mu", 30.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "omega", 30.0, 0.0, 90.0, 1.0);
@@ -78,7 +78,9 @@ function addFormParam(frm, d, vl, mn, mx, stp) {
 
   slider.addEventListener("change", function(){
     console.log(d, document.getElementById(d).value);
-
+    // console.log(ss.a);
+    // ss.updateParams(getControlParams());
+    //  ss.buildTube( scene, true  ); 
   });
 }
 

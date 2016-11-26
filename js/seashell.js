@@ -63,7 +63,7 @@ function buildScene() {
   //DRAW IN DOTS ---- needs debugging
   // ss.buildDots( scene );
   //DRAW THE SPIEN 
-  ss.renderSpine(scene, true); 
+  // ss.renderSpine(scene, true); 
   //DRAW IN TUBE -------
   ss.buildTube( scene, true  ); 
   
@@ -72,8 +72,8 @@ function buildScene() {
 
    // coordinate sys
   // X axis is red. The Y axis is green. The Z axis is blue.
-  object = new THREE.AxisHelper( 1 );             
-  scene.add( object );
+  // object = new THREE.AxisHelper( 1 );             
+  // scene.add( object );
 }
 
 function getControlParams() {

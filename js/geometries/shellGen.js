@@ -134,7 +134,7 @@ class Seashell {
       var spiralPointArray = [];
       var shellEllipseArray = [];
     
-      console.log ("generating spiral. total steps in spiral: ", this.steps); 
+      // console.log ("generating spiral. total steps in spiral: ", this.steps); 
       var theta = 0 ;  
       var rad; 
       var lastVertex = this.getVertexAtTheta(theta ); 
