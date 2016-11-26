@@ -29,7 +29,7 @@ function buildScene() {
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(12, -12, 25); //0, 0, 25
+  camera.position.set(-10, 10, -30); //0, 0, 25
   camera.focalLength = camera.position.distanceTo(scene.position);
   camera.lookAt(scene.position);
 
