@@ -9,7 +9,7 @@ var group;
 var ss ;//seashell instance
 
 init();
-// animate();
+animate();
 
 
 function init() {
