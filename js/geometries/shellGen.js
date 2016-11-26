@@ -240,6 +240,20 @@ class Seashell {
     var tempX;
     var tempY;
 
+    var extrudeMaterial = new THREE.MeshLambertMaterial( {
+     color: 0xeeeeee, 
+     wireframe: false,
+
+   } );
+    var extrudeMaterial = new THREE.MeshPhongMaterial( {
+                
+                color: 0xeeeeee,
+                specular: 0x6698AA,
+                reflectivity: 0.5,
+                shading: THREE.SmoothShading
+              } );
+
+
     for ( var i = 0; i < count; i ++ ) {
         
       t = 2 * i / count * Math.PI;
@@ -254,8 +268,7 @@ class Seashell {
 
     var extrudeShape = new THREE.Shape( extrudeShapePoints );
 
-    var extrudeMaterial = new THREE.MeshLambertMaterial( { color: 0xeeeeee, wireframe: false } );
-
+  
     // add tube mesh for each point on the spiral 
     var l = this._spiral.length ;  
     for (var i = 3 ; i<l; i++){
@@ -288,6 +301,8 @@ class Seashell {
 
       if(ifRenderTube){
          var mesh = new THREE.Mesh( extrudeGeometry, extrudeMaterial );
+         
+         // var mesh = new THREE.Mesh( extrudeGeometry, skyBoxMaterial );
         scene.add( mesh );  
       } 
     }

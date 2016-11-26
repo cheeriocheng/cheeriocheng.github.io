@@ -28,7 +28,7 @@ function init() {
 function buildScene() {
   scene = new THREE.Scene();
 
-  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
   camera.position.set(-10, 10, -30); //0, 0, 25
   camera.focalLength = camera.position.distanceTo(scene.position);
   camera.lookAt(scene.position);
@@ -38,11 +38,25 @@ function buildScene() {
   controls.autoRotate = false; //true;
   controls.enablePan = false;
 
- 
+ // Background
+ var cubeMap = getCubeMap(2);
+ var cubeShader = THREE.ShaderLib['cube'];
+ cubeShader.uniforms['tCube'].value = cubeMap;
+
+ var skyBoxMaterial = new THREE.ShaderMaterial({
+     fragmentShader: cubeShader.fragmentShader,
+     vertexShader: cubeShader.vertexShader,
+     uniforms: cubeShader.uniforms,
+     depthWrite: false,
+     side: THREE.BackSide
+ });
+
+ var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
+ scene.add(skyBox);
   
   // light
   var light = new THREE.DirectionalLight(0xffffff);
-  light.position.set(-1, 1.5, 0.5);
+  light.position.set(-1, 1.5, -0.5);
   scene.add(light);
   
   var ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
