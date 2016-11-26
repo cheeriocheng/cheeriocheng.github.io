@@ -76,20 +76,21 @@ function buildScene() {
   scene.add( object );
 }
 
-
 function getControlParams() {
   return {
-    "A": parseFloat(document.getElementById("A").value),
-    "turns": parseFloat(document.getElementById("turns").value),
+    // "A": parseFloat(document.getElementById("A").value),
+    // "turns": parseFloat(document.getElementById("turns").value),
     "deltaTheta": parseFloat(document.getElementById("deltaTheta").value),
-    "D": parseFloat(document.getElementById("D").value),
-    "steps": parseFloat(document.getElementById("steps").value),
-    "cSteps": parseFloat(document.getElementById("cSteps").value),
+    // "D": parseFloat(document.getElementById("D").value),
+    // "steps": parseFloat(document.getElementById("steps").value),
+    // "cSteps": parseFloat(document.getElementById("cSteps").value),
     "alpha": parseFloat(document.getElementById("alpha").value),
-    "beta": parseFloat(document.getElementById("beta").value),
-    "phi": parseFloat(document.getElementById("phi").value),
-    "mu": parseFloat(document.getElementById("mu").value),
-    "omega": parseFloat(document.getElementById("omega").value)
+    // "beta": parseFloat(document.getElementById("beta").value),
+    // "phi": parseFloat(document.getElementById("phi").value),
+    // "mu": parseFloat(document.getElementById("mu").value),
+    // "omega": parseFloat(document.getElementById("omega").value)
+    "ellipse_a": parseFloat(document.getElementById("ellipse_a").value)
+
   }
 }
 
