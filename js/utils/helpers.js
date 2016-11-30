@@ -26,7 +26,7 @@ function setOrientationControls(e) {
     //renderer = new THREE.StereoEffect(renderer);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    mobile = true;
+    //mobile = true;
 }
 
 function onWindowResize() {
