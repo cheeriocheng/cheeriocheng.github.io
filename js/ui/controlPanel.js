@@ -67,6 +67,7 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
 
   var slider = document.createElement("input");
   slider.setAttribute( "id", d );
+  slider.setAttribute("class","slider")
   slider.setAttribute( "type",'range' );
   slider.setAttribute( "min", mn );
   slider.setAttribute( "max", mx );

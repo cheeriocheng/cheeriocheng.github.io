@@ -242,18 +242,18 @@ class Seashell {
     var tempX;
     var tempY;
 
-    var extrudeMaterial = new THREE.MeshLambertMaterial( {
-     color: 0xeeeeee, 
-     wireframe: false,
+   //  var extrudeMaterial = new THREE.MeshLambertMaterial( {
+   //   color: 0xeeeeee, 
+   //   wireframe: false,
 
-   } );
+   // } );
     var extrudeMaterial = new THREE.MeshPhongMaterial( {
                 
-                color: 0xeeeeee,
-                specular: 0x6698AA,
-                reflectivity: 0.5,
-                shading: THREE.SmoothShading
-              } );
+      color: 0xeeeeee,
+      specular: 0x6698AA,
+      reflectivity: 0.5,
+      shading: THREE.SmoothShading
+    } );
 
 
     for ( var i = 0; i < count; i ++ ) {
@@ -282,7 +282,7 @@ class Seashell {
 
       for (var j = 0 ; j < this._shell[i].length; j++){
       // for (var j = this._shell[i].length-1; j >=0  ; j--){
-        // oneEllipse= new THREE.Geometry(); 
+   
         oneEllipse.vertices.push(this._shell[i][j]);  
       }
       // oneEllipse.vertices.push(this._shell[i][0]);  //completes full loop
@@ -309,8 +309,6 @@ class Seashell {
       } 
     }
   }
-
-
 
 
 }
