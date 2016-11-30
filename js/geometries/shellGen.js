@@ -35,6 +35,8 @@ class Seashell {
 
     this._spiral = null;
     this._shell = null; 
+
+    this._tubeMesh = null;
   }
   
   // loadMoon(){
@@ -300,16 +302,19 @@ class Seashell {
       var extrudeGeometry = new THREE.ExtrudeGeometry( extrudeShape, extrudeSettings );
 
       if(ifRenderTube){
-         var mesh = new THREE.Mesh( extrudeGeometry, extrudeMaterial );
+         this._tubeMesh = new THREE.Mesh( extrudeGeometry, extrudeMaterial );
          
          // var mesh = new THREE.Mesh( extrudeGeometry, skyBoxMaterial );
-        scene.add( mesh );  
+        scene.add( this._tubeMesh );  
       } 
     }
   }
 
 
+
+
 }
+
 
 
 function degToRad (deg){

@@ -34,12 +34,12 @@ addFormParam(cForm, "alpha", 83.0, 82.0, 87.0, 0.25,"a1","a2");
 addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
 // addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
-var rebuildButton = document.createElement("button");
-rebuildButton.type = "submit"; 
-rebuildButton.innerHTML = "rebuild";
-cForm.appendChild(rebuildButton);
+// var rebuildButton = document.createElement("button");
+// rebuildButton.type = "submit"; 
+// rebuildButton.innerHTML = "rebuild";
+// cForm.appendChild(rebuildButton);
 
-// to takeover its submit event.
+// // to takeover its submit event.
 cForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -89,9 +89,8 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
 
   slider.addEventListener("change", function(){
     console.log(d, document.getElementById(d).value);
-    // console.log(ss.a);
-    // ss.updateParams(getControlParams());
-    //  ss.buildTube( scene, true  ); 
+    buildScene();
+   
   });
 }
 

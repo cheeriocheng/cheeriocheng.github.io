@@ -62,6 +62,8 @@ function buildScene() {
   var ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( ambientLight );
 
+  
+
   // events
   window.addEventListener('deviceorientation', setOrientationControls, true);
   window.addEventListener('resize', onWindowResize, false);
