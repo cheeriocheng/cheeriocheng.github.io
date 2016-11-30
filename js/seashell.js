@@ -118,10 +118,10 @@ function render() {
 
   controls.update();
 
-  // if (mobile) {
-  //     camera.position.set(0, 0, 0)
-  //     camera.translateZ(5);
-  // }
+  if (mobile) {
+      camera.position.set(0, 0, 0)
+      camera.translateZ(5);
+  }
   renderer.render(scene, camera);
 
 }
