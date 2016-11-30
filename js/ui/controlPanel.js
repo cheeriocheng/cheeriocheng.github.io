@@ -24,17 +24,18 @@ cFormDiv.appendChild(cForm);
 // addFormParam(cForm, "steps", 30.0, 10.0, 200.0, 10.0); //100
 // addFormParam(cForm, "cSteps", 30.0, 1.0, 20.0, 1.0);
 
-addFormParam(cForm, "beta", 25.0,1.0, 80.0, 5.0);
+addFormParam(cForm, "beta", 25.0,1.0, 89.0, 2.5, "b1", "b2");
 // addFormParam(cForm, "phi", 70.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "mu", 30.0, 0.0, 90.0, 1.0);
 // addFormParam(cForm, "omega", 30.0, 0.0, 90.0, 1.0);
 
-addFormParam(cForm, "alpha", 83.0, 81.0, 85.0, 0.25);
-addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1);
+addFormParam(cForm, "alpha", 83.0, 82.0, 87.0, 0.25,"a1","a2");
+
+addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
 // addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
 var rebuildButton = document.createElement("button");
-rebuildButton.type = "submit";
+rebuildButton.type = "submit"; 
 rebuildButton.innerHTML = "rebuild";
 cForm.appendChild(rebuildButton);
 
@@ -57,8 +58,13 @@ cForm.addEventListener("submit", function (event) {
 //   exportToObj();
 // });
 
-function addFormParam(frm, d, vl, mn, mx, stp) {
-  //<input type="range" min="0" max="50" value="25" />
+function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
+  var imgL = document.createElement("img");
+  imgL.src = "assets/icon_"+imgLeft+".png";
+  imgL.setAttribute("class", "sliderIcon");
+  frm.appendChild(imgL);
+
+
   var slider = document.createElement("input");
   slider.setAttribute( "id", d );
   slider.setAttribute( "type",'range' );
@@ -67,12 +73,17 @@ function addFormParam(frm, d, vl, mn, mx, stp) {
   slider.setAttribute( "value", vl );
   slider.setAttribute( "step", stp );
 
-  var label = document.createElement("label");
-  label.setAttribute("for", d);
-  label.innerHTML = d;
-  frm.appendChild(label);
+  // var label = document.createElement("label");
+  // label.setAttribute("for", d);
+  // label.innerHTML = d;
+  // frm.appendChild(label);
 
   frm.appendChild( slider );
+
+  var imgR = document.createElement("img");
+  imgR.src = "assets/icon_"+imgRight+".png";
+  imgR.setAttribute("class", "sliderIcon");
+  frm.appendChild(imgR);
 
   frm.appendChild( document.createElement("br") );
 
