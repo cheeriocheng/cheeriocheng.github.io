@@ -6,6 +6,13 @@ controlDiv.setAttribute("id",'controlPanel')
 //   newDiv.appendChild(newContent); //add the text node to the newly created div.
 document.body.appendChild(controlDiv); 
 
+var h = document.createElement("H1")                // Create a <h1> element
+var t = document.createTextNode("Move the slider to change the air shell");     // Create a text node
+h.appendChild(t); 
+
+controlDiv.appendChild(h);
+
+
 var cFormDiv = document.createElement("div");
 controlDiv.appendChild(cFormDiv);
 var exportDiv = document.createElement("div");
