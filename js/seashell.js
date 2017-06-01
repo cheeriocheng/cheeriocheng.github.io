@@ -38,21 +38,21 @@ function buildScene() {
   controls.autoRotate = false; //true;
   controls.enablePan = false;
 
- // Background
- var cubeMap = getCubeMap(2);
- var cubeShader = THREE.ShaderLib['cube'];
- cubeShader.uniforms['tCube'].value = cubeMap;
+  // Background
+  // var cubeMap = getCubeMap(2);
+  // var cubeShader = THREE.ShaderLib['cube'];
+  // cubeShader.uniforms['tCube'].value = cubeMap;
 
- var skyBoxMaterial = new THREE.ShaderMaterial({
-     fragmentShader: cubeShader.fragmentShader,
-     vertexShader: cubeShader.vertexShader,
-     uniforms: cubeShader.uniforms,
-     depthWrite: false,
-     side: THREE.BackSide
- });
+  // var skyBoxMaterial = new THREE.ShaderMaterial({
+  //    fragmentShader: cubeShader.fragmentShader,
+  //    vertexShader: cubeShader.vertexShader,
+  //    uniforms: cubeShader.uniforms,
+  //    depthWrite: false,
+  //    side: THREE.BackSide
+  // });
 
- var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
- scene.add(skyBox);
+  // var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
+  // scene.add(skyBox);
   
   // light
   var light = new THREE.DirectionalLight(0xffffff);
@@ -65,7 +65,7 @@ function buildScene() {
   
 
   // events
-  window.addEventListener('deviceorientation', setOrientationControls, true);
+  // window.addEventListener('deviceorientation', setOrientationControls, true);
   window.addEventListener('resize', onWindowResize, false);
 
 
