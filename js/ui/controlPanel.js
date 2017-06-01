@@ -53,17 +53,17 @@ cForm.addEventListener("submit", function (event) {
   buildScene(); // in seashell.js
 });
 
-// //add export button 
-// // 1. Create the button
-// var button = document.createElement("button");
-// button.innerHTML = "export obj";
-// // 2. Append somewhere
-// exportDiv.appendChild(button);
+//add export button 
+// 1. Create the button
+var button = document.createElement("button");
+button.innerHTML = "export obj";
+// 2. Append somewhere
+exportDiv.appendChild(button);
 
-// // 3. Add event handler
-// button.addEventListener ("click", function() {
-//   exportToObj();
-// });
+// 3. Add event handler
+button.addEventListener ("click", function() {
+  exportToObj();
+});
 
 function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
   var imgL = document.createElement("img");

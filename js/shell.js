@@ -6,21 +6,19 @@ var mobile = false;
 var globe;
 var group;
 
-var ss ;//seashell instance
+var airShell ;//airshell instance
 
 init();
 animate();
 
 
 function init() {
-
   // setup
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0)
   document.body.appendChild(renderer.domElement);
-
 
   buildScene();
 }
@@ -61,7 +59,6 @@ function buildScene() {
   
   var ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( ambientLight );
-
   
 
   // events
@@ -69,22 +66,22 @@ function buildScene() {
   window.addEventListener('resize', onWindowResize, false);
 
 
-  ss = new Seashell();
+  airShell = new AirShell();
 
   p = getControlParams();
   // console.log(p);
 
-  ss.updateParams( p );
+  airShell.updateParams( p );
 
   //DRAW IN DOTS ---- needs debugging
-  // ss.buildDots( scene );
+  // airShell.buildDots( scene );
   //DRAW THE SPIEN 
-  // ss.renderSpine(scene, true); 
+  // airShell.renderSpine(scene, true); 
   //DRAW IN TUBE -------
-  ss.buildTube( scene, true  ); 
+  airShell.buildTube( scene, true  ); 
   
  //DRAW IN band -------
-  // ss.buildBand( scene, true  ); 
+  // airShell.buildBand( scene, true  ); 
 
    // coordinate sys
   // X axis is red. The Y axis is green. The Z axis is blue.

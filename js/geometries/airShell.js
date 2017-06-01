@@ -1,6 +1,6 @@
 "use strict";
 
-class Seashell {
+class AirShell {
 
 
   constructor(){
