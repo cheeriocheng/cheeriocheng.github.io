@@ -53,18 +53,27 @@ function buildScene() {
   // scene.add(skyBox);
   
   // light
-  var light = new THREE.DirectionalLight(0xffffff);
-  light.position.set(-1, 1.5, -0.5);
-  scene.add(light);
+  var directionalLight = new THREE.DirectionalLight(0xffffff);
+  directionalLight.position.set(-1, 1.5, -0.5);
+  scene.add(directionalLight);
   
-  var ambientLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+  var ambientLight = new THREE.AmbientLight( 0x333333 ); // soft white light  
   scene.add( ambientLight );
-  
+
+  // var pointLight = new THREE.PointLight( 0xffffff, .1 );
+  // pointLight.position.set(0,0,10);
+  // scene.add( pointLight );
+  // pointLight.add( new THREE.Mesh( new THREE.SphereGeometry( 0.5, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
+
+ 
+  //test 
+  // var geometry = new THREE.SphereGeometry( 5, 16, 8 );
+  // var material = new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } )
+  // var mesh = new THREE.Mesh(geometry, material);
+  // scene.add(mesh);
 
   // events
-  // window.addEventListener('deviceorientation', setOrientationControls, true);
   window.addEventListener('resize', onWindowResize, false);
-
 
   airShell = new AirShell();
 
@@ -116,11 +125,6 @@ function animate() {
 function render() {
 
   controls.update();
-
-  // if (mobile) {
-  //     camera.position.set(0, 0, 0)
-  //     camera.translateZ(5);
-  // }
   renderer.render(scene, camera);
 
 }
