@@ -2,14 +2,11 @@
 //add control panel 
 var controlDiv = document.createElement("div"); 
 controlDiv.setAttribute("id",'controlPanel')
-// var newContent = document.createTextNode("Hi there and greetings!"); 
-//   newDiv.appendChild(newContent); //add the text node to the newly created div.
 document.body.appendChild(controlDiv); 
 
 var h = document.createElement("H1")                // Create a <h1> element
 var t = document.createTextNode("Move the slider to change the air shell");     // Create a text node
 h.appendChild(t); 
-
 controlDiv.appendChild(h);
 
 
@@ -41,26 +38,17 @@ addFormParam(cForm, "alpha", 83.0, 82.0, 87.0, 0.25,"a1","a2");
 addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
 // addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
-// var rebuildButton = document.createElement("button");
-// rebuildButton.type = "submit"; 
-// rebuildButton.innerHTML = "rebuild";
-// cForm.appendChild(rebuildButton);
 
-// // to takeover its submit event.
+// to takeover its submit event.
 cForm.addEventListener("submit", function (event) {
   event.preventDefault();
-
-  buildScene(); // in seashell.js
+  buildScene(); // in shell.js
 });
 
 //add export button 
-// 1. Create the button
 var button = document.createElement("button");
 button.innerHTML = "export obj";
-// 2. Append somewhere
 exportDiv.appendChild(button);
-
-// 3. Add event handler
 button.addEventListener ("click", function() {
   exportToObj();
 });
@@ -96,7 +84,7 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
   frm.appendChild( document.createElement("br") );
 
   slider.addEventListener("change", function(){
-    console.log(d, document.getElementById(d).value);
+    console.log("Parameter", d,"changed to", document.getElementById(d).value);
     buildScene();
    
   });
@@ -108,14 +96,12 @@ function exportToObj() {
 
     var exporter = new THREE.OBJExporter();
     var result = exporter.parse( scene );
-    // floatingDiv.style.display = 'block';
-    // floatingDiv.innerHTML = result.split( '\n' ).join ( '<br />' );
     exportToFile("seashell.obj",result );
 
 }
 
 
-//reza
+//from reza ali 
 function exportToFile( filename, data ) {
   var pom = document.createElement( 'a' );
   pom.href = URL.createObjectURL( new Blob( [ data ], { type : 'text/plain'} ) );

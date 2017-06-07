@@ -68,7 +68,7 @@ function buildScene() {
  
   //test 
   // var geometry = new THREE.SphereGeometry( 5, 16, 8 );
-  // var material = new THREE.MeshLambertMaterial( { color: 0xdddddd, shading: THREE.FlatShading } )
+  // var material = new THREE.MeshLambertMaterial( { color: 0xdddddd } )
   // var mesh = new THREE.Mesh(geometry, material);
   // scene.add(mesh);
 
@@ -85,7 +85,7 @@ function buildScene() {
   //DRAW IN DOTS ---- needs debugging
   // airShell.buildDots( scene );
   //DRAW THE SPIEN 
-  // airShell.renderSpine(scene, true); 
+  // airShell.renderSpiral(scene, true); 
   //DRAW IN TUBE -------
   airShell.buildTube( scene, true  ); 
   

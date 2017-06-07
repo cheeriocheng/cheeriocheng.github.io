@@ -93,27 +93,8 @@ class AirShell {
     this.a = p["ellipse_a"];
           
 
-    //generates this._spiral
-    this.calcSpiral();
-  }
-
-  //equal angular steps means many small steps at the center of the shell,
-  //which is a lot of triangles wasted on small area
-  //this also jams support material inside model
- //while distance is smaller than step, keep adding to theta 
-  getNextVertexOnSpiral(theta , lastVertex ){
-    
-    theta += this.deltaTheta;
-    var newVertex = this.getVertexAtTheta(theta);
-    var dist = newVertex.distanceTo(lastVertex); 
-
-    while(dist< this.minStep ) {
-     theta += this.deltaTheta;
-     newVertex = this.getVertexAtTheta(theta);
-     dist = newVertex.distanceTo(lastVertex); 
-    }
-
-    return [theta , newVertex] ;
+    //generates the spiral and the surface loops 
+    this.calcShell();
   }
 
   getRadAtTheta(theta){
@@ -132,7 +113,7 @@ class AirShell {
 
   }
 
-  calcSpiral(){
+  calcShell(){
       var spiralPointArray = [];
       var shellEllipseArray = [];
     
@@ -143,18 +124,10 @@ class AirShell {
       
       for ( var i = 0; i < this.steps; i ++ ) {
                    
-          // //V1 equal angualar increments ----
+          // equal angualar increments ----
           theta +=  this.deltaTheta ; // maplinear (i, 0, n, 0, turns);
           rad = Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );     
           var newVertex = this.getVertexAtTheta (theta) ;
-
-          //V2 minimal space between steps ---
-          //  var newVertex; 
-          // [theta, newVertex] = this.getNextVertexOnSpiral(theta, lastVertex ); 
-          // // console.log(i, newVertex);
-          // rad = this.getRadAtTheta (theta);
-         
-          //Qtip : keep newVertex at (0,0,0) to make a furball
 
           spiralPointArray.push(newVertex);
           lastVertex = newVertex; 
@@ -167,35 +140,16 @@ class AirShell {
           {
             
             var s= j * Math.PI * 2.0 / this.cSteps;  //angular step around the ellipse 
-
-           //   console.log (s); 
             var r2 = Math.pow( Math.pow(Math.cos(s)/this.a,2) + Math.pow(Math.sin(s)/this.b,2), -0.5 ); //radius at this given angle s
        
-           // //  // add surface manipulations
-           var surfrad = 0;
-            if (this.W1==0 || this.W2==0 || this.N==0) surfrad = 0;
-            else {
-              var lt = (Math.PI * 2 / this.N) * ( this.N* theta / Math.PI / 2 - Math.round(this.N* theta / Math.PI / 2) );
-              surfrad = this.L * Math.exp( -( Math.pow(2*(s-this.P)/this.W1, 2) + Math.pow(2*lt/this.W2, 2) ) );          
-            }
-    //         console.log(surfrad)       ;
-           r2 += surfrad;
-                // console.log(r2)       ;
-
-
             var ellipseX = lastVertex.x + Math.cos(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad * this.D;   // here  rad - 1 closes the opening of the curve at the origin
             var ellipseY = lastVertex.y + Math.cos(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
             var ellipseZ = lastVertex.z + Math.sin(s + this.phi) * r2 * rad;
             
-            // adjust orientation of the 
-            // x -= Math.sin(this.mu) * Math.sin(s + this.phi) * Math.sin(theta + this.omega) * r2;
+            // adjust orientation of the ellipse 
             ellipseX -= Math.sin(this.mu) * Math.sin(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad ;
-
-            // y += Math.sin(this.mu) * Math.sin(s + this.phi) * Math.cos(theta + this.omega) * r2 ;
             ellipseY += Math.sin(this.mu) * Math.sin(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad;
-
-        
-            
+      
             shellEllipseArray[i].push(new THREE.Vector3(ellipseX,ellipseY,ellipseZ));
             
           }
@@ -208,12 +162,12 @@ class AirShell {
   }
 
 // render spiral spine 
-  renderSpine(scene, ifRenderSpine){
+  renderSpiral(scene, ifRenderSpiral){
     
   
 
-    if (ifRenderSpine) { 
-      // console.log("rendering spine");
+    if (ifRenderSpiral) { 
+      
       var geometrySpiral = new THREE.Geometry();
       
       for (var i = 0 ; i<this._spiral.length; i++){
@@ -222,8 +176,8 @@ class AirShell {
       var lineMaterial = new THREE.LineBasicMaterial({
         color: 0xee00ee
       });
-      var spineLine = new THREE.Line( geometrySpiral, lineMaterial );
-      scene.add( spineLine );
+      var spiralLine = new THREE.Line( geometrySpiral, lineMaterial );
+      scene.add( spiralLine );
     }
   }
 
@@ -287,8 +241,6 @@ class AirShell {
       }
       // oneEllipse.vertices.push(this._shell[i][0]);  //completes full loop
 
-   
-
       var extrusionSpline =  new THREE.CatmullRomCurve3( oneEllipse.vertices );
       extrusionSpline.type = 'catmullrom';
       extrusionSpline.closed = true;
@@ -309,8 +261,6 @@ class AirShell {
       } 
     }
   }
-
-
 }
 
 
