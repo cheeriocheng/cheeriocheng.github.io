@@ -96,17 +96,17 @@ class AirShell {
     this.calcShell();
   }
 
-  getRadAtTheta(theta){
-    return  Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );
+  getRadiusAtTheta(theta){
+    return   this.A * Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );
   }
 
   getVertexAtTheta(theta){
       
-    var rad = this.getRadAtTheta(theta);
+    var rad = this.getRadiusAtTheta(theta);
     
-    var x =  this.A * rad * Math.sin(this.beta) * Math.cos(theta) * this.D;
-    var y =  this.A * rad * Math.sin(this.beta) * Math.sin(theta);
-    var z = -this.A * rad * Math.cos(this.beta);    
+    var x =  rad * Math.sin(this.beta) * Math.cos(theta) * this.D;
+    var y =  rad * Math.sin(this.beta) * Math.sin(theta);
+    var z = -rad * Math.cos(this.beta);    
 
     return new THREE.Vector3(x,y,z);
 

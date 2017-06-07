@@ -51,19 +51,7 @@ function buildScene() {
   // scene.add( pointLight );
   // pointLight.add( new THREE.Mesh( new THREE.SphereGeometry( 0.5, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
 
- 
-  //test 
-  // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-  // var cube = new THREE.Mesh( geometry, material );
-  // scene.add( cube );
-
-
-  // var geometry = new THREE.SphereGeometry( 5, 16, 8 );
-  // var material = new THREE.MeshLambertMaterial( { color: 0xdddddd } )
-  // var mesh = new THREE.Mesh(geometry, material);
-  // scene.add(mesh);
-
+  
   // events
   window.addEventListener('resize', onWindowResize, false);
 
@@ -75,9 +63,9 @@ function buildScene() {
   airShell.updateParams( p );
 
   //DRAW THE SPINE
-  airShell.renderSpiral(scene, false); 
+  airShell.renderSpiral(scene, true); 
   //DRAW IN TUBE -------
-  airShell.buildTube( scene, true  ); 
+  airShell.buildTube( scene, false  ); 
   
  
   // coordinate sys
