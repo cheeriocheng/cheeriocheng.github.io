@@ -77,7 +77,6 @@ class AirShell {
 
     // this.loadMoon(); 
 
-
     //// get data from UI 
     // this.A = p["A"];
     // this.turns = p["turns"];
@@ -163,11 +162,7 @@ class AirShell {
 
 // render spiral spine 
   renderSpiral(scene, ifRenderSpiral){
-    
-  
-
     if (ifRenderSpiral) { 
-      
       var geometrySpiral = new THREE.Geometry();
       
       for (var i = 0 ; i<this._spiral.length; i++){
@@ -199,7 +194,6 @@ class AirShell {
    //  var extrudeMaterial = new THREE.MeshLambertMaterial( {
    //   color: 0xeeeeee, 
    //   wireframe: false,
-
    // } );
     var extrudeMaterial = new THREE.MeshPhongMaterial( {
                 

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>My first three.js app</title>
+        <style>
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+        </style>
+    </head>
+    <body>
+        <script src="js/third-party/threejs/three.js"></script>
+        <script src="js/utils/helpers.js"></script>
+        <script>
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            // Background
+            // var cubeMap = getCubeMap(2);
+            // var cubeShader = THREE.ShaderLib['cube'];
+            // cubeShader.uniforms['tCube'].value = cubeMap;
+
+            // var skyBoxMaterial = new THREE.ShaderMaterial({
+            //      fragmentShader: cubeShader.fragmentShader,
+            //      vertexShader: cubeShader.vertexShader,
+            //      uniforms: cubeShader.uniforms,
+            //      depthWrite: false,
+            //      side: THREE.BackSide
+            // });
+
+            // var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
+            // scene.add(skyBox);
+
+            //box
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            var cube = new THREE.Mesh( geometry, material );
+            // var cube = new THREE.Mesh( geometry, skyBoxMaterial );
+            scene.add( cube );
+
+            camera.position.z = 5;
+
+            var render = function () {
+                requestAnimationFrame( render );
+                
+                cube.rotation.x += 0.1;
+                cube.rotation.y += 0.1;
+
+                renderer.render(scene, camera);
+            };
+
+            render();
+        </script>
+    </body>
+</html>
+

@@ -26,6 +26,7 @@ function init() {
 function buildScene() {
   scene = new THREE.Scene();
 
+  //field of view, aspect ratio,  near and far clipping plane.
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
   camera.position.set(-10, 10, -30); //0, 0, 25
   camera.focalLength = camera.position.distanceTo(scene.position);
@@ -36,21 +37,6 @@ function buildScene() {
   controls.autoRotate = false; //true;
   controls.enablePan = false;
 
-  // Background
-  // var cubeMap = getCubeMap(2);
-  // var cubeShader = THREE.ShaderLib['cube'];
-  // cubeShader.uniforms['tCube'].value = cubeMap;
-
-  // var skyBoxMaterial = new THREE.ShaderMaterial({
-  //    fragmentShader: cubeShader.fragmentShader,
-  //    vertexShader: cubeShader.vertexShader,
-  //    uniforms: cubeShader.uniforms,
-  //    depthWrite: false,
-  //    side: THREE.BackSide
-  // });
-
-  // var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
-  // scene.add(skyBox);
   
   // light
   var directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -67,6 +53,12 @@ function buildScene() {
 
  
   //test 
+  // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  // var cube = new THREE.Mesh( geometry, material );
+  // scene.add( cube );
+
+
   // var geometry = new THREE.SphereGeometry( 5, 16, 8 );
   // var material = new THREE.MeshLambertMaterial( { color: 0xdddddd } )
   // var mesh = new THREE.Mesh(geometry, material);
@@ -82,17 +74,13 @@ function buildScene() {
 
   airShell.updateParams( p );
 
-  //DRAW IN DOTS ---- needs debugging
-  // airShell.buildDots( scene );
-  //DRAW THE SPIEN 
-  // airShell.renderSpiral(scene, true); 
+  //DRAW THE SPINE
+  airShell.renderSpiral(scene, false); 
   //DRAW IN TUBE -------
   airShell.buildTube( scene, true  ); 
   
- //DRAW IN band -------
-  // airShell.buildBand( scene, true  ); 
-
-   // coordinate sys
+ 
+  // coordinate sys
   // X axis is red. The Y axis is green. The Z axis is blue.
   // object = new THREE.AxisHelper( 1 );             
   // scene.add( object );
