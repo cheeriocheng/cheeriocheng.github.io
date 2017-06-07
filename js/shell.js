@@ -63,9 +63,9 @@ function buildScene() {
   airShell.updateParams( p );
 
   //DRAW THE SPINE
-  airShell.renderSpiral(scene, true); 
+  airShell.renderSpiral(scene, false); 
   //DRAW IN TUBE -------
-  airShell.buildTube( scene, false  ); 
+  airShell.buildTube( scene, true); 
   
  
   // coordinate sys

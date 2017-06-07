@@ -52,6 +52,7 @@
 
             //box
             var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
             // var geometry = new THREE.SphereGeometry( 1, 16, 8 );
             
             var material = new THREE.MeshBasicMaterial( { 
@@ -71,9 +72,10 @@
 
             var cube = new THREE.Mesh( geometry, material );
             // var cube = new THREE.Mesh( geometry, skyBoxMaterial );
+            // cube.position.set(1,1,1);
+
             scene.add( cube );
 
-            camera.position.z = 5;
 
             var render = function () {
                 requestAnimationFrame( render );

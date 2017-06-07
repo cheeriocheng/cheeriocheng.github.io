@@ -127,7 +127,7 @@ class AirShell {
           theta +=  this.deltaTheta ; // maplinear (i, 0, n, 0, turns);
           rad = Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );     
           var newVertex = this.getVertexAtTheta (theta) ;
-
+          // var newVertex = new THREE.Vector3(0,0,0);
           spiralPointArray.push(newVertex);
           lastVertex = newVertex; 
 
@@ -210,9 +210,6 @@ class AirShell {
       tempX = Math.cos( t ) * b; 
       tempY = Math.sin( t ) * a; 
 
-      // tempX += c* Math.cos(t)*  Math.cos(t*k) ;
-      // tempY += c* Math.cos(t)*  Math.sin(t*k) ;
-
       extrudeShapePoints.push( new THREE.Vector2 ( tempX, tempY));
     }
 
@@ -243,7 +240,6 @@ class AirShell {
         bevelEnabled    : false,
         extrudePath     : extrusionSpline
       };
-      
 
       var extrudeGeometry = new THREE.ExtrudeGeometry( extrudeShape, extrudeSettings );
 
@@ -256,7 +252,6 @@ class AirShell {
     }
   }
 }
-
 
 
 function degToRad (deg){
