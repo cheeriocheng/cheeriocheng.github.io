@@ -1,3 +1,7 @@
+/*
+run this script when the page is loaded 
+*/
+
 var user = false;
 
 var camera, scene, renderer;
@@ -19,24 +23,22 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0)
   document.body.appendChild(renderer.domElement);
-
+  
+  //field of view, aspect ratio,  near and far clipping plane.
+  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
+  camera.position.set(-10, 10, -30); //0, 0, 25
+  
   buildScene();
 }
 
 function buildScene() {
   scene = new THREE.Scene();
 
-  //field of view, aspect ratio,  near and far clipping plane.
-  camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
-  camera.position.set(-10, 10, -30); //0, 0, 25
-  camera.focalLength = camera.position.distanceTo(scene.position);
-  camera.lookAt(scene.position);
+  
 
-  // controls = new THREE.OrbitControls(camera);
   controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.autoRotate = false; //true;
+  controls.autoRotate = false;
   controls.enablePan = false;
-
   
   // light
   var directionalLight = new THREE.DirectionalLight(0xffffff);
@@ -46,12 +48,6 @@ function buildScene() {
   var ambientLight = new THREE.AmbientLight( 0x333333 ); // soft white light  
   scene.add( ambientLight );
 
-  // var pointLight = new THREE.PointLight( 0xffffff, .1 );
-  // pointLight.position.set(0,0,10);
-  // scene.add( pointLight );
-  // pointLight.add( new THREE.Mesh( new THREE.SphereGeometry( 0.5, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) ) );
-
-  
   // events
   window.addEventListener('resize', onWindowResize, false);
 

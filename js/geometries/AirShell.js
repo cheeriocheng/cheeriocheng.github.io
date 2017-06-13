@@ -1,7 +1,9 @@
+/*
+Construct the AirShell
+*/
 "use strict";
 
 class AirShell {
-
 
   constructor(){
     //default: boat ear mooon 
@@ -13,21 +15,21 @@ class AirShell {
     this.D = 1 ;  //direction : 1 or -1 
     this.steps = 45; // how many ellipses C to draw along the spiral 
     this.cSteps = 12; // how many straight lines makes an ellipse C
-    this.alpha= degToRad(83);  //83
-    this.beta=degToRad(25);  //42 how steep the cone of spiral is 
-    this.phi=degToRad(70);  //70
-    this.mu=degToRad(10);  //10 how twisty the spiral is 
-    this.omega=degToRad(30);  //30 ,  70
+    this.alpha= degToRad(83);  // the angle between the tangent and radial line at any point on the spiral
+    this.beta=degToRad(25);  //how open the cone of helico-spiral is 
+    this.phi=degToRad(70);  //  C curve roll
+    this.mu=degToRad(10);  // C curve pitch 
+    this.omega=degToRad(30);  // C curve yaw
     
-    //opening of the tube 
-    this.a=1.3; //1.2 /1.5
-    this.b=1.76; //2.0/1/5
+    //C ellipse shape 
+    this.a=1.3; 
+    this.b=1.76;
 
-    //extrusion
-    this.eA = .5; // 1.2;
-    this.eB = .5; // 1.2;
+    //extrusion tube shape 
+    this.eA = .5; 
+    this.eB = .5; 
     
-    this.L=0; //2
+    this.L=0; 
     this.P=4; 
     this.W1=5; 
     this.W2=3; 
@@ -39,45 +41,12 @@ class AirShell {
     this._tubeMesh = null;
   }
   
-  // loadMoon(){
-  //     this.A =   2.5; //2.5
- 
-  //     this.deltaTheta = degToRad(18) ; //degrees per new session //18 23
-      
-  //     this.minStep = 2;   //allow gaps in first few rings
-  //     this.D = 1 ;  //direction : 1 or -1 
-  //     this.steps = 55; //30,100 how many ellipses C to draw
-  //     this.cSteps = 18; //18 how many straight lines makes an ellipse C
-  //     this.alpha= degToRad(82.5);  //83
-  //     this.beta=degToRad(25);  //42 how steep the cone of spiral is 
-  //     this.phi=degToRad(70);  //70
-  //     this.mu=degToRad(10);  //10 how twisty the spiral is 
-  //     this.omega=degToRad(30);  //30 ,  70
-      
-  //     //opening of the tube 
-  //     this.a=1.34; //1.2 /1.5
-  //     this.b=1.76; //2.0/1/5
-
-  //     //extrusion
-  //     this.eA = 1.2; // 1.2;
-  //     this.eB = 1.2; // 1.2;
-   
-  //     this.L=0; //2
-  //     this.P=4; 
-  //     this.W1=5; 
-  //     this.W2=3; 
-  //     this.N=18;
-
-  // } 
 
 
 
   updateParams( p )
   {
-
-    // this.loadMoon(); 
-
-    //// get data from UI 
+    //// get data from control panel
     // this.A = p["A"];
     // this.turns = p["turns"];
     // this.deltaTheta = degToRad(p["deltaTheta"]);
@@ -91,8 +60,7 @@ class AirShell {
     // this.omega = degToRad(p["omega"]);
     this.a = p["ellipse_a"];
           
-
-    //generates the spiral and the surface loops 
+    //with the new parameter, generate the spiral and the surface loops 
     this.calcShell();
   }
 
