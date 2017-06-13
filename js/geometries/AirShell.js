@@ -5,14 +5,14 @@ class AirShell {
 
   constructor(){
     //default: boat ear mooon 
-    this.A =   2.5; //2.5
+    this.A =   2.5; 
     
-    this.deltaTheta = degToRad(18) ; //degrees per new session //18 23
+    this.deltaTheta = degToRad(18) ; //degrees per new session 
     
     this.minStep = 2;   //allow gaps in first few rings
     this.D = 1 ;  //direction : 1 or -1 
-    this.steps = 45; //30,100 how many ellipses C to draw
-    this.cSteps = 12; //18 how many straight lines makes an ellipse C
+    this.steps = 45; // how many ellipses C to draw along the spiral 
+    this.cSteps = 12; // how many straight lines makes an ellipse C
     this.alpha= degToRad(83);  //83
     this.beta=degToRad(25);  //42 how steep the cone of spiral is 
     this.phi=degToRad(70);  //70
@@ -235,6 +235,7 @@ class AirShell {
       var extrusionSpline =  new THREE.CatmullRomCurve3( oneEllipse.vertices );
       extrusionSpline.type = 'catmullrom';
       extrusionSpline.closed = true;
+
       var extrudeSettings = {
         steps           : this.cSteps*2, //int. number of points used for subdividing segements of extrude spline 
         bevelEnabled    : false,
