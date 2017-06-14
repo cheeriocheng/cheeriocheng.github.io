@@ -1,8 +1,9 @@
 /*
-Construct the AirShell
+This is the basic structure of an AirShell
 */
 "use strict";
 
+//degrees to radians  
 function degToRad (deg) {
   return deg*Math.PI/180.0; 
 }
@@ -10,21 +11,21 @@ function degToRad (deg) {
 class AirShell {
 
   constructor(){
-    //default: boat ear moon shell 
+    //default values are mostly a boat ear moon shell 
     this.A = 2.5; 
     
     this.deltaTheta = degToRad(18) ; //degrees per new session 
     
-    this.D = 1 ;  //direction : 1 or -1 
-    this.steps = 45; // how many ellipses C to draw along the spiral 
-    this.cSteps = 48; // how many straight lines makes an ellipse C
+    this.D = 1 ;      //direction : 1 for CW, -1 for CCW
+    this.steps = 45;  // how many ellipses C to draw along the spiral 
+    this.cSteps = 48; // how many line segments makes an ellipse C
     this.alpha = degToRad(83);  // the angle between the tangent and radial line at any point on the spiral
-    this.beta = degToRad(25);  //how open the cone of helico-spiral is 
-    this.phi = degToRad(70);  //  C curve roll
-    this.mu = degToRad(10);  // C curve pitch 
+    this.beta = degToRad(25);   // how open the cone of helico-spiral is 
+    this.phi = degToRad(70);    // C curve roll
+    this.mu = degToRad(10);     // C curve pitch 
     this.omega = degToRad(30);  // C curve yaw
     
-    //C ellipse shape 
+    //these define the shape of the C ellipse
     this.a = 1.3; 
     this.b = 1.76;
     
@@ -54,11 +55,12 @@ class AirShell {
     this.calcShell();
   }
 
+  //calculate radius on a equiangular spiral, in the polar coordinate
   getRadiusAtTheta(theta){
     return this.A * Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );
-
   }
 
+  //calculate the coordinate of a point on the helico-spiral, in the cartesian coordinate 
   getVertexAtTheta(theta){
     var rad = this.getRadiusAtTheta(theta);
     var x =  rad * Math.sin(this.beta) * Math.cos(theta) * this.D;
@@ -68,9 +70,10 @@ class AirShell {
     return new THREE.Vector3(x,y,z);
   }
 
+  //calculate the spiral and the ellipses along the spiral 
   calcShell(){
     var spiralPointArray = [];
-    var shellEllipseArray = [];
+    var cEllipseArray = [];
     
     for ( var i = 0; i < this.steps; i ++ ) {
       var theta = this.deltaTheta * i;
@@ -79,7 +82,7 @@ class AirShell {
       spiralPointArray.push(newVertex);
      
       // Generate ellipse around each point of spiral
-      shellEllipseArray[i] = [];
+      cEllipseArray[i] = [];
      
       for (var j = 0; j < this.cSteps ; j++) {
         var s= j * Math.PI * 2.0 / this.cSteps;  //angular step around the ellipse 
@@ -96,26 +99,42 @@ class AirShell {
         ellipseX -= Math.sin(this.mu) * Math.sin(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
         ellipseY += Math.sin(this.mu) * Math.sin(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad;
   
-        shellEllipseArray[i].push(new THREE.Vector3(ellipseX,ellipseY,ellipseZ));
+        cEllipseArray[i].push(new THREE.Vector3(ellipseX,ellipseY,ellipseZ));
       }
     }
 
-    // all points on the spiral 
+    //all points on the spiral 
     this._spiral = spiralPointArray;
-    //and ellipses C
-    this._shell = shellEllipseArray; 
+    
+    //all C ellipses along the spiral
+    this._shell = cEllipseArray; 
   }
 
-  // render spiral spine 
+  //render the spiral  
   renderSpiral(scene, ifRenderSpiral) {
     if (ifRenderSpiral) { 
       var geometry = new THREE.Geometry();
       for (var i = 0 ; i<this._spiral.length; i++) {
         geometry.vertices.push(this._spiral[i]);  
       }
-      var lineMaterial = new THREE.LineBasicMaterial({ color: 0xee00ee });
+      var lineMaterial = new THREE.LineBasicMaterial({ color: 0xFA6900 });
       var spiralLine = new THREE.Line(geometry, lineMaterial);
       scene.add(spiralLine);
+    }
+  }
+
+  //render c ellipses along the spiral 
+  renderC(scene, ifRenderC){
+    if (ifRenderC) {
+      var lineMaterial = new THREE.LineBasicMaterial({ color: 0xA7DBD8 });
+      for (var i = 0; i < this._spiral.length; i++) {
+        var geometry = new THREE.Geometry();
+        for (var j = 0; j < this.cSteps; j++){
+            geometry.vertices.push (this._shell[i][j]);
+        }
+        var spiralLine = new THREE.Line(geometry, lineMaterial);
+        scene.add(spiralLine);
+      }
     }
   }
 
@@ -132,7 +151,7 @@ class AirShell {
       var tempY = Math.sin( t ) * a; 
       pointsOnCurve.push( new THREE.Vector2(tempX, tempY));
     }
-    
+
     return new THREE.Shape(pointsOnCurve);
   }
 

@@ -55,9 +55,11 @@ function buildScene() {
   airShell.updateParams(p);
 
   //DRAW THE SPINE
-  airShell.renderSpiral(scene, false); 
+  airShell.renderSpiral(scene, true); 
+  //DRAW THE C ELLIPSES 
+  airShell.renderC(scene, true);
   //DRAW IN TUBE 
-  airShell.buildTube(scene, true); 
+  airShell.buildTube(scene, false); 
 }
 
 function getControlParams() {
