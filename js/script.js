@@ -1,23 +1,22 @@
 /*
-run this script when the page is loaded 
+ * run this script when the page is loaded 
 */
 
-var user = false;
-var mobile = false;
-var camera;
-var scene;
-var renderer;
-var effect;
-var globe;
-var group;
-var airShell; //airshell instance
+var scene;      //scene is the stage we put things in 
+var camera;     //camera defines how we look at the scene 
+var renderer;   //render the scence for the camera
+var controls;   //help rotate the scene with mouse 
+var airShell;   //airshell instance
 
 init();
 animate();
 
+/*
+ * setup the basic scene 
+ * to see this visualized, go to https://threejs.org/examples/?q=camera#webgl_camera 
+ */
 
 function init() {
-  // setup XXX
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -32,8 +31,9 @@ function init() {
   controls.autoRotate = false;
   controls.enablePan = false;
 
-  // events
   window.addEventListener('resize', onWindowResize, false);
+   
+  airShell = new AirShell();
 
   buildScene();
 }
@@ -41,7 +41,7 @@ function init() {
 function buildScene() {
   scene = new THREE.Scene();
  
-  // light
+  //add light to the scene
   var directionalLight = new THREE.DirectionalLight(0xffffff);
   directionalLight.position.set(-1, 1.5, -0.5);
   scene.add(directionalLight);
@@ -49,24 +49,15 @@ function buildScene() {
   var ambientLight = new THREE.AmbientLight( 0x333333 ); // soft white light  
   scene.add( ambientLight );
 
- 
-  airShell = new AirShell();
-
+  // get the parameters from control panel 
   p = getControlParams();
-  // console.log(p);
-
+  // update the shell acoordingly
   airShell.updateParams(p);
 
   //DRAW THE SPINE
   airShell.renderSpiral(scene, false); 
   //DRAW IN TUBE 
   airShell.buildTube(scene, true); 
-  
- 
-  // coordinate sys
-  // X axis is red. The Y axis is green. The Z axis is blue.
-  // object = new THREE.AxisHelper( 1 );             
-  // scene.add( object );
 }
 
 function getControlParams() {

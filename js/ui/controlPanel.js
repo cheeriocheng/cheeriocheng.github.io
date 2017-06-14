@@ -1,3 +1,6 @@
+/*
+ * This creates the control panel
+ */
 
 //add control panel 
 var controlDiv = document.createElement("div"); 
@@ -69,11 +72,6 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
   slider.setAttribute( "value", vl );
   slider.setAttribute( "step", stp );
 
-  // var label = document.createElement("label");
-  // label.setAttribute("for", d);
-  // label.innerHTML = d;
-  // frm.appendChild(label);
-
   frm.appendChild( slider );
 
   var imgR = document.createElement("img");
@@ -90,14 +88,11 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
   });
 }
 
-
-
 function exportToObj() {
   var exporter = new THREE.OBJExporter();
   var result = exporter.parse( scene );
   exportToFile("seashell.obj",result );
 }
-
 
 //from reza ali 
 function exportToFile( filename, data ) {

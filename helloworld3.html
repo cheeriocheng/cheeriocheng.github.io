@@ -17,6 +17,7 @@
              * setup the basic scene 
              * to see this visualized, go to https://threejs.org/examples/?q=camera#webgl_camera 
              */
+             
             var scene;      //scene is the stage we put things in 
             var camera;     //camera defines how we look at the scene 
             var renderer;   //render the scence for the camera
@@ -73,7 +74,7 @@
 
             // smooth the circle out with the Catmull-Rom spline (https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline)
             var curve = new THREE.CatmullRomCurve3();
-            for (var i=0; i< steps; i++){
+            for (var i=0; i<= steps; i++){
                 var theta = deltaTheta*i; 
                 var x = r * Math.cos(theta);
                 var y = r * Math.sin(theta);

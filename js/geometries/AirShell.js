@@ -3,7 +3,6 @@ Construct the AirShell
 */
 "use strict";
 
-
 function degToRad (deg) {
   return deg*Math.PI/180.0; 
 }
@@ -16,10 +15,9 @@ class AirShell {
     
     this.deltaTheta = degToRad(18) ; //degrees per new session 
     
-    this.minStep = 2;   //allow gaps in first few rings
     this.D = 1 ;  //direction : 1 or -1 
     this.steps = 45; // how many ellipses C to draw along the spiral 
-    this.cSteps = 12; // how many straight lines makes an ellipse C
+    this.cSteps = 24; // how many straight lines makes an ellipse C
     this.alpha = degToRad(83);  // the angle between the tangent and radial line at any point on the spiral
     this.beta = degToRad(25);  //how open the cone of helico-spiral is 
     this.phi = degToRad(70);  //  C curve roll
@@ -29,20 +27,10 @@ class AirShell {
     //C ellipse shape 
     this.a = 1.3; 
     this.b = 1.76;
-
-    //extrusion tube shape 
-    this.eA = .5; 
-    this.eB = .5; 
     
-    this.L = 0; 
-    this.P = 4; 
-    this.W1 = 5; 
-    this.W2 = 3; 
-    this.N = 18;
-
+    //store the data for the spiral and the shell 
     this._spiral = null;
     this._shell = null; 
-
     this._tubeMesh = null;
   }
   
@@ -117,7 +105,7 @@ class AirShell {
     this._shell = shellEllipseArray; 
   }
 
-// render spiral spine 
+  // render spiral spine 
   renderSpiral(scene, ifRenderSpiral) {
     if (ifRenderSpiral) { 
       var geometry = new THREE.Geometry();
@@ -130,17 +118,28 @@ class AirShell {
     }
   }
 
-  buildSlice() {
+  buildCrossSection() {
+    //ellipse 
+    var a = 0.5;
+    var b = 0.5;
+    var pointsOnCurve = [];
+    var steps = 20;
 
+    for ( var i = 0; i <= steps; i ++ ) {
+      t = 2 * i / steps * Math.PI;
+      var tempX = Math.cos( t ) * b; 
+      var tempY = Math.sin( t ) * a; 
+      pointsOnCurve.push( new THREE.Vector2(tempX, tempY));
+    }
+
+    return new THREE.Shape(pointsOnCurve);
   }
- 
+
 
   buildTube(scene, ifRenderTube) {
-    var extrudeShapePoints = [], count =60;
-    //section 
-    var a = this.eA;  //
-    var b = this.eB;//1
-    
+
+    var crossSection = this.buildCrossSection();
+
     var extrudeMaterial = new THREE.MeshPhongMaterial({                
       color: 0xeeeeee,
       specular: 0x6698AA,
@@ -148,21 +147,10 @@ class AirShell {
       shading: THREE.SmoothShading
     });
 
-    for ( var i = 0; i < count; i ++ ) {
-      t = 2 * i / count * Math.PI;
-      var tempX = Math.cos( t ) * b; 
-      var tempY = Math.sin( t ) * a; 
-      extrudeShapePoints.push( new THREE.Vector2(tempX, tempY));
-    }
-
-    var extrudeShape = new THREE.Shape(extrudeShapePoints);
-  
     // add tube mesh for each point on the spiral 
-    var l = this._spiral.length ;  
-    for (var i = 3 ; i<l; i++){
-
-      // geometrySpiral.vertices.push(this._spiral[i]);  
+    for (var i = 0; i<  this._spiral.length; i++){
       var oneEllipse = new THREE.Geometry(); 
+
       for (var j = 0 ; j < this._shell[i].length; j++){
         oneEllipse.vertices.push(this._shell[i][j]);  
       }
@@ -171,12 +159,12 @@ class AirShell {
       extrusionSpline.closed = true;
 
       var extrudeSettings = {
-        steps           : this.cSteps*2, //int. number of points used for subdividing segements of extrude spline 
+        steps           : this.cSteps, //int. number of points used for subdividing segements of extrude spline 
         bevelEnabled    : false,
         extrudePath     : extrusionSpline
       };
 
-      var extrudeGeometry = new THREE.ExtrudeGeometry( extrudeShape, extrudeSettings );
+      var extrudeGeometry = new THREE.ExtrudeGeometry( crossSection, extrudeSettings );
 
       if(ifRenderTube){
         this._tubeMesh = new THREE.Mesh( extrudeGeometry, extrudeMaterial );
