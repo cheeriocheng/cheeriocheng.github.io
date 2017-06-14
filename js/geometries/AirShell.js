@@ -17,7 +17,7 @@ class AirShell {
     
     this.D = 1 ;  //direction : 1 or -1 
     this.steps = 45; // how many ellipses C to draw along the spiral 
-    this.cSteps = 24; // how many straight lines makes an ellipse C
+    this.cSteps = 48; // how many straight lines makes an ellipse C
     this.alpha = degToRad(83);  // the angle between the tangent and radial line at any point on the spiral
     this.beta = degToRad(25);  //how open the cone of helico-spiral is 
     this.phi = degToRad(70);  //  C curve roll
@@ -56,6 +56,7 @@ class AirShell {
 
   getRadiusAtTheta(theta){
     return this.A * Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );
+
   }
 
   getVertexAtTheta(theta){
@@ -70,26 +71,26 @@ class AirShell {
   calcShell(){
     var spiralPointArray = [];
     var shellEllipseArray = [];
-  
-    var theta = 0;  
-    var lastVertex = this.getVertexAtTheta(theta ); 
     
     for ( var i = 0; i < this.steps; i ++ ) {
-      theta = this.deltaTheta * i;
+      var theta = this.deltaTheta * i;
       var rad = Math.exp( theta * Math.cos(this.alpha) / Math.sin(this.alpha) );     
       var newVertex = this.getVertexAtTheta(theta);
       spiralPointArray.push(newVertex);
-      lastVertex = newVertex; 
-
+     
       // Generate ellipse around each point of spiral
       shellEllipseArray[i] = [];
      
       for (var j = 0; j < this.cSteps ; j++) {
         var s= j * Math.PI * 2.0 / this.cSteps;  //angular step around the ellipse 
         var r2 = Math.pow( Math.pow(Math.cos(s)/this.a,2) + Math.pow(Math.sin(s)/this.b,2), -0.5 ); //radius at this given angle s 
-        var ellipseX = lastVertex.x + Math.cos(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad * this.D;   
-        var ellipseY = lastVertex.y + Math.cos(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
-        var ellipseZ = lastVertex.z + Math.sin(s + this.phi) * r2 * rad;
+
+        // add ripples to the ellipse 
+        // r2 += this.a/10 * Math.cos(s*12);
+
+        var ellipseX = newVertex.x + Math.cos(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad * this.D;   
+        var ellipseY = newVertex.y + Math.cos(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
+        var ellipseZ = newVertex.z + Math.sin(s + this.phi) * r2 * rad;
 
         // adjust orientation of the ellipse 
         ellipseX -= Math.sin(this.mu) * Math.sin(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
@@ -131,7 +132,7 @@ class AirShell {
       var tempY = Math.sin( t ) * a; 
       pointsOnCurve.push( new THREE.Vector2(tempX, tempY));
     }
-
+    
     return new THREE.Shape(pointsOnCurve);
   }
 
