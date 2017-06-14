@@ -51,21 +51,56 @@
 
             //geometry + material = viewable objects 
             var line = new THREE.Geometry();
-            line.vertices.push(new THREE.Vector3(-1, 0, 1));
-            line.vertices.push(new THREE.Vector3(0, 0, 0));
-            line.vertices.push(new THREE.Vector3(1, 0, 1));
+            // line.vertices.push(new THREE.Vector3(-1, 0, 1));
+            // line.vertices.push(new THREE.Vector3(0, 0, 0));
+            // line.vertices.push(new THREE.Vector3(1, 0, 1));
+
+            // create a circle with line segments 
+            var r = 1; 
+            var steps = 10;
+            var deltaTheta = 2*Math.PI/steps;
+            for (var i=0; i< steps; i++){
+                var theta = deltaTheta*i; 
+                var x = r * Math.cos(theta);
+                var y = r * Math.sin(theta);
+                line.vertices.push(new THREE.Vector3(x,y,0));
+            }
 
             var material = new THREE.LineBasicMaterial({ color: 0xffff00 });
 
             var lineObject = new THREE.Line(line, material);
-            scene.add(lineObject);    
+            scene.add(lineObject);   
 
+            // smooth the circle out with the Catmull-Rom spline (https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline)
+            var curve = new THREE.CatmullRomCurve3();
+            for (var i=0; i< steps; i++){
+                var theta = deltaTheta*i; 
+                var x = r * Math.cos(theta);
+                var y = r * Math.sin(theta);
+                curve.points.push (new THREE.Vector3(x,y,0));
+            }
+            curve.closed = true;
+            
+            var geometry = new THREE.Geometry();
+            geometry.vertices = curve.getPoints( 30 );
+            var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+            var curveObject = new THREE.Line( geometry, material );
+            scene.add(curveObject); 
+
+            //extrude a tube along the circle 
+            //TubeBufferGeometry(path, tubularSegments, radius, radiusSegments, closed)
+            var crossSection = new THREE.TubeBufferGeometry( curve, 20, 0.4, 8, true );
+            var material = new THREE.MeshBasicMaterial( { color: 0x00ff00,wireframe:true } );
+            var donutMesh = new THREE.Mesh( crossSection, material );
+            scene.add( donutMesh );
 
             /*
              * animate and render the scene 
              */
             var render = function () {
                 requestAnimationFrame( render );
+                scene.rotation.x += 0.1 * Math.random();
+                scene.rotation.y += 0.01;
                 renderer.render(scene, camera);
             };
 

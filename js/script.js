@@ -3,21 +3,21 @@ run this script when the page is loaded
 */
 
 var user = false;
-
-var camera, scene, renderer;
-var effect;
 var mobile = false;
+var camera;
+var scene;
+var renderer;
+var effect;
 var globe;
 var group;
-
-var airShell ;//airshell instance
+var airShell; //airshell instance
 
 init();
 animate();
 
 
 function init() {
-  // setup
+  // setup XXX
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -28,18 +28,19 @@ function init() {
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
   camera.position.set(-10, 10, -30); //0, 0, 25
   
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.autoRotate = false;
+  controls.enablePan = false;
+
+  // events
+  window.addEventListener('resize', onWindowResize, false);
+
   buildScene();
 }
 
 function buildScene() {
   scene = new THREE.Scene();
-
-  
-
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.autoRotate = false;
-  controls.enablePan = false;
-  
+ 
   // light
   var directionalLight = new THREE.DirectionalLight(0xffffff);
   directionalLight.position.set(-1, 1.5, -0.5);
@@ -48,20 +49,18 @@ function buildScene() {
   var ambientLight = new THREE.AmbientLight( 0x333333 ); // soft white light  
   scene.add( ambientLight );
 
-  // events
-  window.addEventListener('resize', onWindowResize, false);
-
+ 
   airShell = new AirShell();
 
   p = getControlParams();
   // console.log(p);
 
-  airShell.updateParams( p );
+  airShell.updateParams(p);
 
   //DRAW THE SPINE
   airShell.renderSpiral(scene, false); 
-  //DRAW IN TUBE -------
-  airShell.buildTube( scene, true); 
+  //DRAW IN TUBE 
+  airShell.buildTube(scene, true); 
   
  
   // coordinate sys
@@ -78,25 +77,21 @@ function getControlParams() {
     // "D": parseFloat(document.getElementById("D").value),
     // "steps": parseFloat(document.getElementById("steps").value),
     // "cSteps": parseFloat(document.getElementById("cSteps").value),
-    "alpha": parseFloat(document.getElementById("alpha").value),
-    "beta": parseFloat(document.getElementById("beta").value),
+    alpha: parseFloat(document.getElementById("alpha").value),
+    beta: parseFloat(document.getElementById("beta").value),
     // "phi": parseFloat(document.getElementById("phi").value),
     // "mu": parseFloat(document.getElementById("mu").value),
     // "omega": parseFloat(document.getElementById("omega").value)
-    "ellipse_a": parseFloat(document.getElementById("ellipse_a").value)
-
-  }
+    ellipse_a: parseFloat(document.getElementById("ellipse_a").value),
+  };
 }
 
 function animate() {
-
   requestAnimationFrame(animate);
   render();
 }
 
 function render() {
-
   controls.update();
   renderer.render(scene, camera);
-
 }

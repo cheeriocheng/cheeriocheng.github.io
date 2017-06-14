@@ -51,9 +51,20 @@
 
             //geometry + material = viewable objects 
             var line = new THREE.Geometry();
-            line.vertices.push(new THREE.Vector3(-1, 0, 1));
-            line.vertices.push(new THREE.Vector3(0, 0, 0));
-            line.vertices.push(new THREE.Vector3(1, 0, 1));
+            // line.vertices.push(new THREE.Vector3(-1, 0, 1));
+            // line.vertices.push(new THREE.Vector3(0, 0, 0));
+            // line.vertices.push(new THREE.Vector3(1, 0, 1));
+
+            // create a circle with line segments 
+            var r = 1; 
+            var steps = 10;
+            var deltaTheta = 2*Math.PI/steps;
+            for (var i=0; i< steps; i++){
+                var theta = deltaTheta*i; 
+                var x = r * Math.cos(theta);
+                var y = r * Math.sin(theta);
+                line.vertices.push(new THREE.Vector3(x,y,0));
+            }
 
             var material = new THREE.LineBasicMaterial({ color: 0xffff00 });
 

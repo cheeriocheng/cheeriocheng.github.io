@@ -93,11 +93,9 @@ function addFormParam(frm, d, vl, mn, mx, stp, imgLeft, imgRight ) {
 
 
 function exportToObj() {
-
-    var exporter = new THREE.OBJExporter();
-    var result = exporter.parse( scene );
-    exportToFile("seashell.obj",result );
-
+  var exporter = new THREE.OBJExporter();
+  var result = exporter.parse( scene );
+  exportToFile("seashell.obj",result );
 }
 
 
@@ -116,4 +114,4 @@ function exportToFile( filename, data ) {
   else {
     pom.click();
   }
-};
+}
