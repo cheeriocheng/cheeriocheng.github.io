@@ -25,7 +25,7 @@ function init() {
   
   //field of view, aspect ratio,  near and far clipping plane.
   camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000); 
-  camera.position.set(-10, 10, -30); //0, 0, 25
+  camera.position.set(-10, 10, -45); 
   
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.autoRotate = false;
@@ -55,11 +55,11 @@ function buildScene() {
   airShell.updateParams(p);
 
   //DRAW THE SPINE
-  airShell.renderSpiral(scene, true); 
+  airShell.renderSpiral(scene, false); 
   //DRAW THE C ELLIPSES 
-  airShell.renderC(scene, true);
+  airShell.renderC(scene, false);
   //DRAW IN TUBE 
-  airShell.buildTube(scene, false); 
+  airShell.buildTube(scene, true); 
 }
 
 function getControlParams() {

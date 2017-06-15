@@ -12,13 +12,13 @@ class AirShell {
 
   constructor(){
     //default values are mostly a boat ear moon shell 
-    this.A = 2.5; 
+    this.A = 3.25; 
     
     this.deltaTheta = degToRad(18) ; //degrees per new session 
     
     this.D = 1 ;      //direction : 1 for CW, -1 for CCW
     this.steps = 45;  // how many ellipses C to draw along the spiral 
-    this.cSteps = 48; // how many line segments makes an ellipse C
+    this.cSteps = 24; // how many line segments makes an ellipse C
     this.alpha = degToRad(83);  // the angle between the tangent and radial line at any point on the spiral
     this.beta = degToRad(25);   // how open the cone of helico-spiral is 
     this.phi = degToRad(70);    // C curve roll
@@ -26,8 +26,8 @@ class AirShell {
     this.omega = degToRad(30);  // C curve yaw
     
     //these define the shape of the C ellipse
-    this.a = 1.3; 
-    this.b = 1.76;
+    this.a = 1.5; //1.3; 
+    this.b = 2.6;//1.76;
     
     //store the data for the spiral and the shell 
     this._spiral = null;
@@ -89,7 +89,7 @@ class AirShell {
         var r2 = Math.pow( Math.pow(Math.cos(s)/this.a,2) + Math.pow(Math.sin(s)/this.b,2), -0.5 ); //radius at this given angle s 
 
         // add ripples to the ellipse 
-        // r2 += this.a/10 * Math.cos(s*12);
+        // r2 += this.a*0.08 * Math.cos(s*12);
 
         var ellipseX = newVertex.x + Math.cos(s + this.phi) * Math.cos(theta + this.omega) * r2 * rad * this.D;   
         var ellipseY = newVertex.y + Math.cos(s + this.phi) * Math.sin(theta + this.omega) * r2 * rad;
@@ -140,8 +140,8 @@ class AirShell {
 
   buildCrossSection() {
     //ellipse 
-    var a = 0.5;
-    var b = 0.5;
+    var a = 0.75; //0.5;
+    var b = 0.75; //0.5;
     var pointsOnCurve = [];
     var steps = 20;
 

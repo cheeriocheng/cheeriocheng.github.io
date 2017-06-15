@@ -37,8 +37,8 @@ addFormParam(cForm, "beta", 25.0,1.0, 89.0, 2.5, "b1", "b2");
 // addFormParam(cForm, "omega", 30.0, 0.0, 90.0, 1.0);
 
 addFormParam(cForm, "alpha", 83.0, 82.0, 90.0, 0.25,"a1","a2");
-
-addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
+addFormParam(cForm, "ellipse_a", 1, 1.5, 2.9, 0.1,"e1","e2");
+// addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
 // addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
 
