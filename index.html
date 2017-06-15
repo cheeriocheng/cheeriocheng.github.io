@@ -13,29 +13,35 @@
                 margin: 0px;
                 overflow: hidden;
                 height: 100%;
+                font-family: Arial, Helvetica, sans-serif
             }
             
-             #controlPanel {
+            #controlPanel {
                 position: fixed;
                 top: 0;
                 right: 0;
                 width: 260px;
                 height: 100%;
-                background-color: rgba(100, 100, 100, 0.7) ; 
+                background-color: rgba(50, 50, 50, 0.8) ; 
                 border-left: 0px ;
                 padding: 20px;
                 overflow-y: scroll;
                 
             }
             
-           h1 {
-                font-family: Verdana, Geneva, sans-serif;
-                font-size: 24px;
-                font-style: normal;
-                font-variant: normal;
-                font-weight: 100;
-                line-height: 26.4px;
-                color: rgb(220,220,220) ;
+           .title {
+                font-weight: lighter;
+                font-size: 20px;
+                text-align: center;
+                color: rgb(220,220,220);
+                margin-bottom: 20px;
+            }
+
+            .intro {
+                font-weight: lighter;
+                font-size: 16px;
+                text-align: left;
+                color: rgb(220,220,220);
                 margin-bottom: 40px;
             }
 
@@ -48,10 +54,11 @@
                 z-index: 100;
                 display: block;
             }
+
             .slider {
                 width: 180px;
-                
             }
+
             div.floating {
                 color : #ffffff;
                 background : #000000;
@@ -73,6 +80,21 @@
                 width: 30px; 
             }
 
+            button {
+                background-color: #555;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                width:240px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 30px 2px;
+                cursor: pointer;
+                padding: 10px;
+            }
+
             span.link {
 
                 color: skyblue;
@@ -83,6 +105,7 @@
             a {
                 color: skyblue
             }
+
         </style>
     </head>
     <body>

@@ -7,12 +7,20 @@ var controlDiv = document.createElement("div");
 controlDiv.setAttribute("id",'controlPanel')
 document.body.appendChild(controlDiv); 
 
-var h = document.createElement("H1")                // Create a <h1> element
-var t = document.createTextNode("Move the slider to change the air shell");     // Create a text node
-h.appendChild(t); 
-controlDiv.appendChild(h);
+var title = document.createElement("div")               
+var t = document.createTextNode("AirShell"); 
+title.className = "title";
+title.appendChild(t); 
+controlDiv.appendChild(title);
+
+var intro = document.createElement("div")               
+t = document.createTextNode("Change the parameters to see the shells grow into different shapes."); 
+intro.className = "intro";
+intro.appendChild(t); 
+controlDiv.appendChild(intro);
 
 
+//Move the slider to change the air shell
 var cFormDiv = document.createElement("div");
 controlDiv.appendChild(cFormDiv);
 var exportDiv = document.createElement("div");
@@ -38,7 +46,6 @@ addFormParam(cForm, "beta", 25.0,1.0, 89.0, 2.5, "b1", "b2");
 
 addFormParam(cForm, "alpha", 83.0, 82.0, 90.0, 0.25,"a1","a2");
 addFormParam(cForm, "ellipse_a", 1, 1.5, 2.9, 0.1,"e1","e2");
-// addFormParam(cForm, "ellipse_a", 1.3, 1.0, 1.9, 0.1,"e1","e2");
 // addFormParam(cForm, "deltaTheta", 18.0, 12.0, 23.0, 1.0); //18
 
 
@@ -50,7 +57,7 @@ cForm.addEventListener("submit", function (event) {
 
 //add export button 
 var button = document.createElement("button");
-button.innerHTML = "export obj";
+button.innerHTML = "export .obj";
 exportDiv.appendChild(button);
 button.addEventListener ("click", function() {
   exportToObj();

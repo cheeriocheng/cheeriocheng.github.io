@@ -146,7 +146,7 @@ class AirShell {
     var steps = 20;
 
     for ( var i = 0; i <= steps; i ++ ) {
-      t = 2 * i / steps * Math.PI;
+      var t = 2 * i / steps * Math.PI;
       var tempX = Math.cos( t ) * b; 
       var tempY = Math.sin( t ) * a; 
       pointsOnCurve.push( new THREE.Vector2(tempX, tempY));
