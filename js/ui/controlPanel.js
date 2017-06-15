@@ -9,16 +9,23 @@ document.body.appendChild(controlDiv);
 
 var title = document.createElement("div")               
 var t = document.createTextNode("AirShell"); 
-title.className = "title";
 title.appendChild(t); 
+title.className = "title";
 controlDiv.appendChild(title);
 
 var intro = document.createElement("div")               
 t = document.createTextNode("Change the parameters to see the shells grow into different shapes."); 
-intro.className = "intro";
+intro.className = "text";
 intro.appendChild(t); 
 controlDiv.appendChild(intro);
 
+var link = document.createElement('a');
+var linkText = document.createTextNode("github");
+link.className = "text";
+link.appendChild(linkText);
+link.title = "see source code";
+link.href = "https://github.com/cheeriocheng/cheeriocheng.github.io";
+controlDiv.appendChild(link);
 
 //Move the slider to change the air shell
 var cFormDiv = document.createElement("div");
